@@ -1,0 +1,11 @@
+{
+    "vscode-pets.petSize": "medium",
+    "vscode-pets.petType": "dog",
+    "vscode-pets.theme": "forest",
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.associations": {
+        "*.ejs": "html",
+        "vector": "cpp",
+        "ios": "cpp"
+    }
+}
