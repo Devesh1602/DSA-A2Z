@@ -1,0 +1,39 @@
+class Solution {
+public:
+ int helper(int h,int l,int target,vector<int>&nums)
+ {
+     while(l<=h)
+     {
+         int mid=l+(h-l)/2;
+         
+         if((long)nums[mid]*nums[mid]==target)
+         return mid;
+         else if((long)nums[mid]*nums[mid]<target)
+         l=mid+1;
+         else
+         h=mid-1;
+     }
+     return -1;
+ }
+    int longestSquareStreak(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int n=nums.size();
+        vector<int>dp(n,1);
+        int ans=-1;
+        for(int i=1;i<n;i++)
+        {
+            int a=nums[i];
+           int temp= helper(i-1,0,a,nums);
+            if(temp!=-1)
+            dp[i]=1+dp[temp];
+             ans=max(ans,dp[i]);
+        }
+        for(int i=0;i<n;i++)
+        {
+            cout<<dp[i]<<" ";
+        }
+       if(ans==1)
+           return -1;
+        return ans;
+    }
+};
