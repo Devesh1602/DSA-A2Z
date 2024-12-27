@@ -1,0 +1,15 @@
+class Solution {
+public:
+
+    const int INF = 1e9; 
+
+    int maxScoreSightseeingPair(vector<int>& values) {
+        int n = values.size(), ans = -INF; 
+        int suffixMax = values[n - 1] - n + 1; 
+        for (int i = n - 2; i >= 0; i--) {
+            ans = max(ans, values[i] + i + suffixMax); 
+            suffixMax = max(suffixMax, values[i] - i); 
+        }
+        return ans; 
+    }
+};
