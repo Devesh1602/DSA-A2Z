@@ -1,0 +1,22 @@
+class Solution {
+//TC: O(N)
+//SC: O(N)
+public:
+    int waysToSplitArray(vector<int>& nums) {
+        int n= nums.size();
+        vector<long long> prefix;
+
+        long long sum= 0;
+        for(auto &i: nums){
+            sum+= i;
+            prefix.push_back(sum);
+        }
+        int count= 0;
+        sum= 0;
+        for(int i= n- 1; i> 0; i--){
+            sum+= nums[i];
+            if(prefix[i]- nums[i]>= sum) count++;
+        }
+        return count;
+    }
+};
