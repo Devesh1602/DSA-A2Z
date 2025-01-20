@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int firstCompleteIndex(vector<int>& arr, vector<vector<int>>& mat) {
+        // Map to store the position (row, col) of each value in the matrix
+        unordered_map<int, pair<int, int>> posMap;
+        int rCount = mat.size();     // Number of rows
+        int cCount = mat[0].size(); // Number of columns
+        // Populate the map with matrix values and their positions
+        for (int r = 0; r < rCount; r++) {
+            for (int c = 0; c < cCount; c++) {
+                posMap[mat[r][c]] = {r, c};
+            }
+        }
+        vector<int> colFill(cCount, 0); // Tracks filled cells in each column
+        vector<int> rowFill(rCount, 0); // Tracks filled cells in each row
+
+        // Iterate through the array to find the first complete row or column
+        for (int i = 0; i < arr.size(); i++) {
+            // Get the row and column of the current value
+            int row = posMap[arr[i]].first;
+            int col = posMap[arr[i]].second;
+            // Increment the fill counts
+            colFill[col]++;
+            rowFill[row]++;
+            // Check if the row or column is fully filled
+            if (colFill[col] == rCount || rowFill[row] == cCount) {
+                return i; // Return the index where the first complete row/column is found
+            }
+        }
+        return 0;
+    }
+};
