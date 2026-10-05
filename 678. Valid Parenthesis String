@@ -1,0 +1,35 @@
+/*
+Use two pointers, low and high, keep track of the minimum and maximum possible number of unmatched (, since * can act as (, ), or empty.
+If the maximum ever becomes negative, it’s invalid; at the end, if the minimum is 0, the string can be valid.
+*/
+
+class Solution {
+public:
+    bool checkValidString(string s) {
+        int low = 0;
+        int high = 0;
+
+        for (char c : s) {
+            if (c == '(') {
+                low++;
+                high++;
+            }
+            else if (c == ')') {
+                low--;
+                high--;
+            }
+            else { // '*'
+                low--;
+                high++;
+            }
+
+            if (high < 0) {
+                return false;
+            }
+
+            low = max(low, 0);
+        }
+
+        return low == 0;
+    }
+};
